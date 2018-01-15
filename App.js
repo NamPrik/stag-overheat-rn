@@ -9,7 +9,8 @@ import {
   Scene,
   Router,
   Switch,
-  Modal
+  Modal,
+  Stack
 } from 'react-native-router-flux';
 import { Icon } from 'native-base';
 import {
@@ -36,7 +37,7 @@ class TabIcon extends Component {
 export default class App extends Component<{}> {
   componentWillMount(){
     this.scenes = Actions.create(
-      <Scene key="root" tabs={true}>
+      <Stack key="root">
         <Scene key="menus">
           <Scene key="tabbar" tabs={true}>
             <Scene key="Questions" component={Question} title="Questions" icon={TabIcon} hideNavBar={true}/>
@@ -44,7 +45,7 @@ export default class App extends Component<{}> {
           </Scene>
           <Scene key="QuestionDetail" component={QuestionDetail} title="Question Detail" hideNavBar={true}/>
         </Scene>
-      </Scene>
+      </Stack>
     );
   }
   render() {
