@@ -1,57 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
+import {
+  Actions,
+  Scene,
+  Router,
+  Switch,
+  Modal
+} from 'react-native-router-flux';
+import About from './scenes/About';
+import Question from './scenes/Question';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-export default class App extends Component<{}> {
-  render() {
+class TabIcon extends Component {
+  render(){
+    const title = this.props.title;
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <Text>{title}</Text>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+export default class App extends Component<{}> {
+  componentWillMount(){
+    this.scenes = Actions.create(
+      <Scene key="root" tabs={true}>
+        <Scene key="tabbar" tabs={true} tabBarStyle={{backgroundColor:'#f7f7f7'}}>
+          <Scene key="Questions" component={Question} title="Questions" icon={TabIcon} hideNavBar={true}/>
+          <Scene key="About" component={About} title="About" icon={TabIcon} hideNavBar={true}/>
+        </Scene>
+      </Scene>
+    );
+  }
+  render() {
+    return <Router scenes={this.scenes}/>
+  }
+}
