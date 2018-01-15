@@ -23,14 +23,27 @@ import { observer } from 'mobx-react/native';
         super();
     }
 
+    handleAdd(){
+        const doc = {
+            title: "Fifth Question", author: "Dan", vote: 2, description: "Description 5", createdAt: new Date("2018-01-14")
+        };
+        this.props.store.add(doc);
+    }
+
     renderHeader(){
         const {title} = this.props;
 
         return (
             <Header>
+                <Left/>
                 <Body>
                     <Title>{title}</Title>
                 </Body>
+                <Right>
+                    <Button transparent onPress={()=> this.handleAdd()}>
+                        <Icon name="add-circle" style={{color: '#0098ff'}}/>
+                    </Button>
+                </Right>
             </Header>
         )
     }
@@ -58,6 +71,7 @@ import { observer } from 'mobx-react/native';
                     <ListView
                         dataSource={dataSource}
                         renderRow={this.renderRow.bind(this)}
+                        enableEmptySections={true}
                     />
                 </Content>
             </Container>
