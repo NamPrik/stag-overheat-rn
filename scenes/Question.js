@@ -9,7 +9,8 @@ import {
     Right,
     ListItem,
     Text,
-    Icon
+    Icon,
+    Button
 } from 'native-base';
 import { ListView } from 'react-native';
 import { Actions } from 'react-native-router-flux';
@@ -20,7 +21,6 @@ import { observer } from 'mobx-react/native';
 
     constructor(){
         super();
-        const ds = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
     }
 
     renderHeader(){
