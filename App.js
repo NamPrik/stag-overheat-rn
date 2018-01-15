@@ -17,7 +17,10 @@ import {
   About,
   Question,
   QuestionDetail
-} from './scenes'
+} from './scenes';
+import {
+  QuestionStore
+} from './stores';
 
 class TabIcon extends Component {
   render(){
@@ -40,7 +43,7 @@ export default class App extends Component<{}> {
       <Stack key="root">
         <Scene key="menus">
           <Scene key="tabbar" tabs={true}>
-            <Scene key="Questions" component={Question} title="Questions" icon={TabIcon} hideNavBar={true}/>
+            <Scene key="Questions" store={QuestionStore} component={Question} title="Questions" icon={TabIcon} hideNavBar={true}/>
             <Scene key="About" component={About} title="About" icon={TabIcon} hideNavBar={true}/>
           </Scene>
           <Scene key="QuestionDetail" component={QuestionDetail} title="Question Detail" hideNavBar={true}/>
