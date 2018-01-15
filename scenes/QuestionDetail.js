@@ -9,9 +9,13 @@ import {
     Container,
     Content,
     Text,
-    Icon
+    Icon,
+    Card,
+    CardItem,
+    Thumbnail
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import moment from 'moment';
 
 export default class QuestionDetail extends Component {
 
@@ -33,13 +37,38 @@ export default class QuestionDetail extends Component {
     }
 
     render(){
-        const {title, author} = this.props.question;
+        const {title, author, vote, description, createdAt} = this.props.question;
         return (
             <Container>
                 {this.renderHeader()}
                 <Content>
-                    <Text>Title: {title}</Text>
-                    <Text>Author: {author}</Text>
+                    <Card>
+                        <CardItem bordered>
+                            <Left>
+                                <Icon name="help-circle"/>
+                                <Body>
+                                    <Text>{title}</Text>
+                                    <Text note>{author}, on {moment(createdAt).format("DD/MM/YYYY")}</Text>
+                                </Body>
+                            </Left>
+                        </CardItem>
+                        <CardItem>
+                            <Body>
+                                <Text>
+                                    {description}
+                                </Text>
+                            </Body>
+                            <Right>
+                                <Button transparent>
+                                    <Icon action name="arrow-up"/>
+                                </Button>
+                                <Text>{vote}</Text>
+                                <Button transparent>
+                                    <Icon active name="arrow-down"/>
+                                </Button>
+                            </Right>
+                        </CardItem>
+                    </Card>
                 </Content>
             </Container>
         );
